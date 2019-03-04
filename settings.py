@@ -1,5 +1,6 @@
 from os.path import isfile
 from envparse import env
+import logging
 
 ENV = env.str('ENV', default='.env')
 if isfile(ENV):
@@ -14,6 +15,9 @@ DB_PASSWORD = env.str('DB_PASSWORD')
 
 # logging
 LOG_LEVEL = env.str('LOG_LEVEL', default='ERROR')
+LOG_HANDLER = logging.StreamHandler()
+LOF_FORMATTER = logging.Formatter(
+    '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 APP_HOST = env.str('APP_HOST', default='127.0.0.1')
 APP_PORT = env.str('APP_PORT', default='8000')
