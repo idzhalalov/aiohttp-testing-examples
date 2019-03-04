@@ -18,25 +18,27 @@ def question_obj(data):
 
 
 class QuestionHandler(web.View):
+    def __init__(self, request):
+        self.pk = request.match_info.get('pk')
+        super(QuestionHandler, self).__init__(request)
 
     async def get(self):
         code = 200
-        pk = self.request.match_info.get('pk')
         page_num = int(self.request.query.get('page', '1'))
 
         logger.debug(f'Request: {self.request.url}')
 
         # A single object
-        if pk:
+        if self.pk:
             try:
                 question = await Question.get_by(pk)
                 result = question_obj(question)
             except Question.DoesNotExist:
                 code = 404
-                logger.debug(f'Object was not found by id {pk}')
+                logger.debug(f'Object was not found by id {self.pk}')
                 result = {
-                    'pk': pk,
-                    'error_message': 'Object is not found by pk'
+                    'id': self.pk,
+                    'error_message': 'Object is not found by id'
                 }
         # List of objects
         else:
@@ -68,3 +70,20 @@ class QuestionHandler(web.View):
             result,
             status=201
         )
+
+    async def delete(self):
+        logger.debug(f'Removing a question: id - {self.pk}')
+
+        n = await Question.objects().execute(
+            Question.delete().where(Question.id == self.pk)
+        )
+
+        if not n:
+            logger.debug(f'Object was not found by id {self.pk}')
+            result = {
+                'id': self.pk,
+                'error_message': 'Object is not found by id'
+            }
+            return web.json_response(result, status=404)
+
+        return web.json_response(status=202)
