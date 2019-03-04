@@ -1,8 +1,9 @@
-# aiohttp testing example
+# aiohttp testing examples
 
 The project is focused on testing aiohttp apps with pytest. Main points are: testing an asynchronous code which 
-is using database; pytest fixtures for a database; design of Peewee models. Thus the provided example of REST API project 
-doesn't use any of authentification, data validation and rate limits techniques.
+is using database; pytest fixtures for a database. 
+
+As the example of an aiohttp application I have made a simple REST API for a pool application from the [standard Django tutorial](https://docs.djangoproject.com/en/2.0/intro/tutorial01/).
 
 ## Examples of tasks to be solved
 
