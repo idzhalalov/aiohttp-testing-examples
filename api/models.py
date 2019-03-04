@@ -2,6 +2,7 @@ from datetime import datetime
 
 from peewee import *
 from peewee_async import Manager
+from peewee import ForeignKeyField
 from peewee_asyncext import PostgresqlExtDatabase
 
 database = PostgresqlExtDatabase(None)
@@ -37,4 +38,29 @@ class BaseModel(Model):
 
     class Meta:
         database = database
-        legacy_table_names = False
+
+
+class Question(BaseModel):
+    question_text = CharField(max_length=200)
+    pub_date = DateTimeField('date published')
+
+    @classmethod
+    async def add(cls, data):
+        result = await Question.objects().create(
+            Question,
+            question_text=data.get('question_text'),
+            pub_date=data.get('pub_date', datetime.now())
+        )
+
+        return result
+
+
+class Choice(BaseModel):
+    question = ForeignKeyField(
+        Question,
+        object_id_name='question_id',
+        related_name='choice',
+        db_column='question_id'
+    )
+    choice_text = CharField(max_length=200)
+    votes = IntegerField(default=0)
