@@ -1,7 +1,15 @@
 # aiohttp testing example
 
 The project is focused on testing aiohttp apps with pytest. Main points are: testing an asynchronous code which 
-is using database; pytest fixtures for a database; design of Peewee models.
+is using database; pytest fixtures for a database; design of Peewee models. Thus the provided example of REST API project 
+doesn't use any of authentification, data validation and rate limits techniques.
+
+## Examples of tasks to be solved
+
+* Setting up a test database
+* Creating pytest fixtures for Peewee models
+* Testing an aiohttp code which is works with database using Peewee-async
+* Run database migrations automatically before tests
 
 ## Built With
 
@@ -23,11 +31,6 @@ It really doesn't matter which relational database you'll use. MySQL or Postgres
 * Activate the virtual environment and install packages from requirements.txt
 * Create .env file in the project's root directory (.env.example file is provided as the example)
 * Run the app `python app.py` or the tests `pytest`
-
-## Important notes
-
-Since the provided example of REST API project doesn't use any of authentification techniques, data validation 
-and rate limits solutions it's important to note that the code as it is **should not be used in production.**
 
 ## Running the tests
 
