@@ -9,8 +9,9 @@ As the example of an aiohttp application I have made a simple REST API for a poo
 
 * Working with a database within tests
 * Creating pytest fixtures for Peewee models
-* Run database migrations automatically before tests
+* Run database migrations automatically before tests 
 * Testing an aiohttp code which is works with database using Peewee-async
+* A fixture which is helping to get the uri path of an appropriate resource (`route_path()`)
 
 ## Built With
 
