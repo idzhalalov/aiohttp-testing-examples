@@ -1,4 +1,4 @@
-# aiohttp testing examples
+# aiohttp and peewee-async testing examples
 
 The project is focused on testing aiohttp apps with pytest. Main points are: testing an asynchronous code which 
 is using database; pytest fixtures for a database. 
