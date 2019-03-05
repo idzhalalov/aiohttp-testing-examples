@@ -110,12 +110,20 @@ async def question(request, question_factory):
 async def choice_factory(loop, question):
 
     class ChoiceFactory:
-        async def get(self):
-            return await models.Choice.add({
+        async def get(self, question_obj=None):
+            if not question_obj:
+                question_obj = question
+
+            return await models.Choice.add(self.initial_data(), question_obj.id)
+
+        @staticmethod
+        def initial_data(question_id=None):
+            return {
+                'question_id': question_id,
                 'choice_text': fake.text(
                     max_nb_chars=models.Choice.choice_text.max_length),
                 'votes': fake.random_number(3)
-            }, question.id)
+            }
 
     return ChoiceFactory()
 
