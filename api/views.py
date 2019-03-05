@@ -113,7 +113,8 @@ class ChoiceHandler(BaseHandler):
         }
 
     async def get(self):
-        code = 200
+        result = []
+        where_exp = None
         page_num = int(self.request.query.get('page', '1'))
         question_id = self.request.query.get('question_id')
 
@@ -121,38 +122,23 @@ class ChoiceHandler(BaseHandler):
 
         # Filter by question_id
         if question_id:
-            question_id = int(question_id)
+            where_exp = (Choice.question_id == int(question_id))
 
-            try:
-                choice = await Choice.get_by(
-                    expression=(Choice.question_id == question_id)
-                )
-                result = self._format_obj(choice)
-            except Choice.DoesNotExist:
-                code = 404
-                logger.debug(f'Object was not found by id {self.pk}')
-                result = {
-                    'question_id': question_id,
-                    'error_message': 'Object is not found by "question_id"'
-                }
         # List of objects
-        else:
-            result = []
+        choices = await Choice.objects().execute(
+            Choice
+                .select(Choice)
+                .where(where_exp)
+                .order_by(Choice.created_at.desc())
+                .paginate(page_num, settings.API_ITEMS_PER_PAGE)
+        )
 
-            questions = await Choice.objects().execute(
-                Choice
-                    .select(Choice, Question)
-                    .join(Question)
-                    .order_by(Question.pub_date.desc())
-                    .paginate(page_num, settings.API_ITEMS_PER_PAGE)
-            )
-
-            for question in questions:
-                result.append(self._format_obj(question))
+        for choice in choices:
+            result.append(self._format_obj(choice))
 
         logger.debug(f'Result: {result}')
 
-        return web.json_response(result, status=code)
+        return web.json_response(result, status=web.HTTPOk.status_code)
 
     async def post(self):
         try:
