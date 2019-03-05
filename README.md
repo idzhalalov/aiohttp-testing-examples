@@ -7,10 +7,10 @@ As the example of an aiohttp application I have made a simple REST API for a poo
 
 ## Examples of tasks to be solved
 
-* Setting up a test database
+* Working with a database within tests
 * Creating pytest fixtures for Peewee models
-* Testing an aiohttp code which is works with database using Peewee-async
 * Run database migrations automatically before tests
+* Testing an aiohttp code which is works with database using Peewee-async
 
 ## Built With
 
@@ -29,9 +29,11 @@ It really doesn't matter which relational database you'll use. MySQL or Postgres
 
 * Clone the repository
 * Create a virtual environment with the appropriate version of Python
-* Activate the virtual environment and install packages from requirements.txt
-* Create .env file in the project's root directory (.env.example file is provided as the example)
-* Run the app `python app.py` or the tests `pytest`
+* Activate the virtual environment and install packages from `requirements.txt`
+* Create a `.env` file in the project's root directory (`.env.example` file is provided as the example)
+* Create a database for the application. Example: `pool`
+* Create a test database with the postfix `_test`. Example: `pool_test`
+* Run the tests: `pytest`
 
 ## Running the tests
 
