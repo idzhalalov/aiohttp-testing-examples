@@ -3,9 +3,9 @@ from datetime import datetime
 from peewee import *
 from peewee_async import Manager
 from peewee import ForeignKeyField
-from peewee_asyncext import PostgresqlExtDatabase
+from peewee_async import PostgresqlDatabase
 
-database = PostgresqlExtDatabase(None)
+database = PostgresqlDatabase(None)
 
 
 class BaseModel(Model):
