@@ -64,3 +64,19 @@ class Choice(BaseModel):
     )
     choice_text = CharField(max_length=200)
     votes = IntegerField(default=0)
+
+    @classmethod
+    async def add(cls, data, question_id):
+        try:
+            await Question.objects().get(Question, id=question_id)
+        except Question.DoesNotExist:
+            raise Question.DoesNotExist()
+
+        result = await Choice.objects().create(
+            Choice,
+            question_id=question_id,
+            choice_text=data.get('choice_text'),
+            votes=data.get('votes', 0)
+        )
+
+        return result
