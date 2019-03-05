@@ -50,12 +50,6 @@ The tests are contain `print()` instructions to support a verbose mode so `pytes
 pytest -s
 ```
 
-You also may want to observe the application's logs while tests are running. To achieve this you should change the level of the logger from `ERROR` to `DEBUG` within `tests/conftest.py`:
-
-```
-settings.logger.setLevel('ERROR')
-```
-
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
