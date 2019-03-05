@@ -119,7 +119,7 @@ class ChoiceHandler(BaseHandler):
 
         logger.debug(f'Request: {self.request.url}')
 
-        # A single object
+        # Filter by question_id
         if question_id:
             question_id = int(question_id)
 
