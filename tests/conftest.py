@@ -92,7 +92,7 @@ async def question_factory(loop, request, db_objects):
             return {
                 'question_text': fake.text(
                     max_nb_chars=models.Question.question_text.max_length),
-                'pub_date': datetime.now()
+                'pub_date': str(datetime.now())
             }
 
     request.addfinalizer(cleanup_db)
