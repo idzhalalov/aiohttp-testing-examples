@@ -1,6 +1,7 @@
-import settings
-from aiohttp import web
 import pytest
+from aiohttp import web
+
+import settings
 from api.models import Question
 
 

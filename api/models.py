@@ -1,9 +1,8 @@
 from datetime import datetime
 
 from peewee import *
-from peewee_async import Manager
 from peewee import ForeignKeyField
-from peewee_async import PostgresqlDatabase
+from peewee_async import Manager, PostgresqlDatabase
 
 database = PostgresqlDatabase(None)
 

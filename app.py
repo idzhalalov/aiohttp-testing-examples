@@ -1,10 +1,10 @@
 from aiohttp import web
+from peewee_migrate import Router
 
 import settings
 from routes import routes
 from api.models import database
 from utils.helpers import get_logger
-from peewee_migrate import Router
 
 app = web.Application()
 logger = get_logger()

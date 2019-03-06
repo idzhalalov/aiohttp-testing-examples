@@ -1,5 +1,6 @@
-from api.models import BaseModel, Question, database
 from peewee_async import Manager
+
+from api.models import Question, BaseModel, database
 
 
 async def test_objects():

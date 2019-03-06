@@ -5,12 +5,12 @@ from datetime import datetime
 import pytest
 from faker import Faker
 from aiohttp import web
-from aiohttp.web_urldispatcher import DynamicResource
 from peewee_migrate import Router
+from aiohttp.web_urldispatcher import DynamicResource
 
 import settings
-from routes import routes
 import api.models as models
+from routes import routes
 
 fake = Faker()
 DB_NAME = settings.DB_NAME + '_test'

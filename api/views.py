@@ -1,9 +1,10 @@
-from aiohttp import web
-from api.models import Question, Choice
-import settings
-from utils.helpers import get_logger
 from json import JSONDecodeError
 
+from aiohttp import web
+
+import settings
+from api.models import Choice, Question
+from utils.helpers import get_logger
 
 logger = get_logger(__name__)
 

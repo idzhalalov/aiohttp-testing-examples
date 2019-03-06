@@ -1,6 +1,7 @@
-from os.path import isfile
-from envparse import env
 import logging
+from os.path import isfile
+
+from envparse import env
 
 ENV = env.str('ENV', default='.env')
 if isfile(ENV):
