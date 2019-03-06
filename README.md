@@ -18,6 +18,7 @@ As the example of an aiohttp application I have made a simple REST API for a poo
 * [aiohttp](https://aiohttp.readthedocs.io/) - asynchronous HTTP Client/Server for asyncio and Python
 * [Postgresql](https://www.postgresql.org/docs/manuals/) - powerful, open source object-relational database system
 * [Async-peewee](https://peewee-async.readthedocs.io/en/latest/) - a library providing asynchronous interface powered by [asyncio](https://docs.python.org/3/library/asyncio.html) for [peewee](https://github.com/coleifer/peewee) ORM
+* [peewee-migrate](https://github.com/klen/peewee_migrate) - a simple migration engine for Peewee
 
 ### Prerequisites
 
@@ -36,7 +37,7 @@ It really doesn't matter which relational database you'll use. MySQL or Postgres
 * Create a test database with the postfix `_test`. Example: `pool_test`
 * Run the tests: `pytest`
 
-## Running the tests
+## Run tests
 
 Run tests:
 
@@ -49,6 +50,42 @@ The tests are contain `print()` instructions to support a verbose mode so `pytes
 ```
 pytest -s
 ```
+
+## Database Migrations
+
+Migrations are **run automatically** on the application start up.
+
+### Examples of usage
+
+#### Create
+
+```
+pw_migrate create --database "postgresql://[user]:[password]@[host]/[db_name]" --auto api.models [migration_name]
+```
+
+#### Run
+
+##### All
+
+```
+pw_migrate migrate --database "postgresql://[user]:[password]@[host]/[db_name]"
+```
+
+##### Single
+
+```
+pw_migrate migrate --database "postgresql://[user]:[password]@[host]/[db_name]" --name [migration_name]
+```
+
+
+#### Rollback
+
+```
+pw_migrate rollback --database "postgresql://[user]:[password]@[host]/[db_name]" migration_name
+```
+
+Only one migration from the end would be cancelled
+
 
 ## Contributing
 
