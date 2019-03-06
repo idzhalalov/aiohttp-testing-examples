@@ -4,6 +4,7 @@ import settings
 from routes import routes
 from api.models import database
 from utils.helpers import get_logger
+from peewee_migrate import Router
 
 app = web.Application()
 logger = get_logger()
@@ -18,7 +19,10 @@ database.init(
     database=settings.DB_NAME,
     user=settings.DB_USER,
     password=settings.DB_PASSWORD)
-database.set_allow_sync(False)
+
+# Run migrations
+router = Router(database)
+router.run()
 
 # Run app
 logger.debug('Application is started')
